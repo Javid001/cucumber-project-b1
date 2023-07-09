@@ -9,41 +9,60 @@ import java.time.Duration;
 
 public class Driver {
 
-    private Driver() {
+    /*
+    Creating the private constructor so this class's object is not reachable from outside
+     */
+    private Driver(){
     }
 
-    private static WebDriver driver;
+    /*
+    Making driver instance private
+    Static - run before everything else and also use in static method
+     */
 
-    public static WebDriver getDriver() {
+    // private static WebDriver driver;
+    // implemented threadLocal to achieve multiThread locally, we created pool of drivers
+    private static InheritableThreadLocal <WebDriver> driverPool = new InheritableThreadLocal<>();
 
-        if(driver==null){
+
+    /*
+    reusable method that will return the same driver instance everytime when called
+     */
+
+    /**
+     * singleton pattern
+     * @return driver
+     * @author nsh
+     */
+    public static WebDriver getDriver(){
+        if(driverPool.get()==null){
             String browserType = ConfigurationReader.getProperty("browser");
             switch (browserType.toLowerCase()){
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+                    driverPool.set(new ChromeDriver());
+                    driverPool.get().manage().window().maximize();
+                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
                     break;
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
+                    driverPool.set(new FirefoxDriver());
+                    driverPool.get().manage().window().maximize();
+                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
                     break;
-
             }
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
         }
-        return driver;
-
-
+        return driverPool.get();
     }
 
+    /**
+     * closing driver
+     * @author nsh
+     */
     public static void closeDriver (){
-        if(driver !=null){
-            driver.quit();
-            driver = null;
-
+        if(driverPool.get() !=null){
+            driverPool.get().quit();
+            driverPool.remove();
         }
     }
-
 }

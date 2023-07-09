@@ -1,9 +1,8 @@
 package io.loop.utilities;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import io.cucumber.java.Scenario;
+import org.junit.Assert;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,9 +10,23 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.Set;
 
-import static org.testng.Assert.assertTrue;
+
 
 public class BrowserUtils {
+
+    public static Scenario myScenario;
+
+    public static void takeScreenshot(){
+        try {
+            myScenario.log("Current url is: " + Driver.getDriver().getCurrentUrl());
+            final byte[] screenshot = ((TakesScreenshot)Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+            myScenario.attach(screenshot, "image/png", myScenario.getName());
+        } catch (WebDriverException wbd){
+            wbd.getMessage();
+        } catch (ClassCastException cce){
+            cce.getMessage();
+        }
+    }
 
     public static void switchWindowAndValidate(WebDriver driver, String expectedUrl, String expectedTitle) {
         expectedUrl = expectedTitle.toLowerCase();
@@ -25,7 +38,7 @@ public class BrowserUtils {
                 break;
             }
         }
-        assertTrue(driver.getTitle().toLowerCase().contains(expectedTitle));
+        Assert.assertTrue(driver.getTitle().toLowerCase().contains(expectedTitle));
     }
 
     /**
@@ -46,7 +59,7 @@ public class BrowserUtils {
     }
 
     public static void validateTitle(WebDriver driver, String expectedTitle) {
-        assertTrue(driver.getTitle().contains(expectedTitle));
+        Assert.assertTrue(driver.getTitle().contains(expectedTitle));
     }
 
     public static void loopLinkClick(String nameOfthePage) {
@@ -116,6 +129,23 @@ public class BrowserUtils {
     }
 
     /**
+     * Waits for the provided element to be visible on the page
+     * @param element
+     * @param timeToWaitInSec
+     * @return
+     * @author nsh
+     */
+    /**
+     * Clicks on an element using JavaScript
+     * @param element
+     * @author nsh
+     */
+    public static void clickWithJS(WebElement element) {
+        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
+    }
+
+    /**
      * method that will wait element becomes clickable
      *
      * @param element
@@ -161,6 +191,19 @@ public class BrowserUtils {
 
     public static void dragDrop(WebElement elementDrag,WebElement elementDrop ){
         new Actions(Driver.getDriver()).dragAndDrop(elementDrag,elementDrop).perform();
+
+    }
+
+    public static void screenshot(){
+        byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+        scenario.attach(screenshot, "image/png", scenario.getName());
+    }
+    public static Scenario scenario;
+    public static void screenshot_URL(){
+
+        scenario.log("Current url is: " + Driver.getDriver().getCurrentUrl());
+        final byte[] screenshot = ((TakesScreenshot)Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+        scenario.attach(screenshot, "image/png", scenario.getName());
 
     }
 }
