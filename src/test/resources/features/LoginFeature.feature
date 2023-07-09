@@ -1,12 +1,17 @@
 Feature: Docuport Login Logout Feature
 
+Background: will run for each scenario first
+  Given user is on Docuport login page
+
+  @smoke @regression
   Scenario: Login as a client
     Given user is on Docuport login page
     When user enters username for client
-    And user enter password for client
+    And user enters password for client
     And user clicks login button
     Then user should see the home page for client
 
+    @regression
     Scenario: Login as a employee
       Given user is on Docuport login page
       When user enters username for employee
@@ -14,3 +19,25 @@ Feature: Docuport Login Logout Feature
       And user clicks login button
       Then user should see the home page for employee
 
+  @regression
+  Scenario: Login as a advisor
+    Given user is on Docuport login page
+    When user enters username for advisor
+    And user enters password for advisor
+    And user clicks login button
+    Then user should see the home page for advisor
+
+@regression
+Scenario: Login as a admin
+  Given user is on Docuport login page
+  When user enters username for admin
+  And user enters password for admin
+  And user clicks login button
+  Then user should see the home page for admin
+
+  @regression
+  Scenario: Login as a client map practice
+    When user enters credentials
+    | username | b1g1_client@gmail.com |
+    | password | Group1                |
+    Then user should see the home page for client

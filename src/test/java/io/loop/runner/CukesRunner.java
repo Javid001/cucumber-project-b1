@@ -6,15 +6,17 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features ="src/test/resources/features",
-        glue = "io/loop/step_definitions"
+        plugin = {"html:target/html-reports/cucumber-reports.html",
+                "json:target/json-reports/json-report",
+                "rerun:target/rerun.txt",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+        features = "src/test/resources/features",
+        glue = "io/loop/step_definitions",
+        dryRun = false,
+//        tags = "@wip",
+        monochrome = true
 )
 
 
-
-
-
-
 public class CukesRunner {
-
 }
