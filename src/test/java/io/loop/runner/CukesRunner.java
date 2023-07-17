@@ -13,8 +13,9 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "io/loop/step_definitions",
         dryRun = false,
-//        tags = "@wip",
-        monochrome = true
+        tags = "@new",
+        monochrome = true,
+        publish = false
 )
 
 
