@@ -3,9 +3,15 @@ package io.loop.utilities;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static io.cucumber.core.internal.com.fasterxml.jackson.databind.cfg.CoercionInputShape.Array;
 
 public class Driver {
 
@@ -50,6 +56,14 @@ public class Driver {
                     driverPool.get().manage().window().maximize();
                     driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
                     break;
+                case "headless":
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--headless"); // Enable headless mode
+                    options.addArguments("start-maximized"); // maximize
+                    WebDriverManager.chromedriver().setup();
+                    driverPool.set(new ChromeDriver(options));
+                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
             }
         }
         return driverPool.get();
@@ -64,5 +78,10 @@ public class Driver {
             driverPool.get().quit();
             driverPool.remove();
         }
+    }
+
+    public static void main(String[] args) {
+       List<Integer>list = new ArrayList<>(Arrays.asList(12,23));
+       List<String>name = new ArrayList<>(Arrays.asList("Nadir,Feyruz"));
     }
 }

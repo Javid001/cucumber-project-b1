@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
-    public LoginPage(){
+public class LoginPage extends BasePageForDocuport {
+    public LoginPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
@@ -22,17 +22,18 @@ public class LoginPage {
 
     /**
      * logins to docuport
+     *
      * @param username
      * @param password
      * @author nsh
      */
-    public void loginDocuport(String username, String password){
+    public void loginDocuport(String username, String password) {
         BrowserUtils.waitForVisibility(usernameInput, 5);
         usernameInput.clear();
         usernameInput.sendKeys(username);
         passwordInput.clear();
         passwordInput.sendKeys(password);
-        BrowserUtils.waitForClickable(loginButton,5);
-        BrowserUtils.clickWithJS(loginButton);
+        BrowserUtils.waitForClickable(loginButton, 5);
+//        BrowserUtils.clickWithJS(loginButton);
     }
 }

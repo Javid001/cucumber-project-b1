@@ -206,6 +206,7 @@ public class BrowserUtils {
         scenario.attach(screenshot, "image/png", scenario.getName());
 
     }
+
 }
 
 

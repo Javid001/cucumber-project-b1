@@ -3,7 +3,8 @@ Feature: Docuport Login Logout Feature
 Background: will run for each scenario first
   Given user is on Docuport login page
 
-  @smoke @regression
+ # @smoke @regression
+  @Javid
   Scenario: Login as a client
     Given user is on Docuport login page
     When user enters username for client
@@ -11,7 +12,8 @@ Background: will run for each scenario first
     And user clicks login button
     Then user should see the home page for client
 
-    @regression
+    #@regression
+  @Javid
     Scenario: Login as a employee
       Given user is on Docuport login page
       When user enters username for employee
@@ -19,7 +21,8 @@ Background: will run for each scenario first
       And user clicks login button
       Then user should see the home page for employee
 
-  @regression
+  #@regression
+  @Javid
   Scenario: Login as a advisor
     Given user is on Docuport login page
     When user enters username for advisor
@@ -27,7 +30,8 @@ Background: will run for each scenario first
     And user clicks login button
     Then user should see the home page for advisor
 
-@regression
+#@regression
+  @Javid
 Scenario: Login as a admin
   Given user is on Docuport login page
   When user enters username for admin
@@ -35,7 +39,8 @@ Scenario: Login as a admin
   And user clicks login button
   Then user should see the home page for admin
 
-  @regression
+  #@regression
+  @Javid
   Scenario: Login as a client map practice
     When user enters credentials
     | username | b1g1_client@gmail.com |

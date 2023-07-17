@@ -17,14 +17,12 @@ public class Hooks {
 
     private static final Logger LOG = LogManager.getLogger();
 
-
     @Before
     public void setUp(Scenario scenario){
         Driver.getDriver();
         BrowserUtils.myScenario = scenario;
         LOG.info("...........START AUTOMATION.......LOOP ACADEMY......");
     }
-
 
     @After
     public void tearDown(Scenario scenario){
