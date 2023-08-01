@@ -4,7 +4,7 @@ Background: will run for each scenario first
   Given user is on Docuport login page
 
  # @smoke @regression
-  @Javid
+  @smoke
   Scenario: Login as a client
     Given user is on Docuport login page
     When user enters username for client
@@ -22,7 +22,7 @@ Background: will run for each scenario first
       Then user should see the home page for employee
 
   #@regression
-  @Javid
+  @smoke
   Scenario: Login as a advisor
     Given user is on Docuport login page
     When user enters username for advisor
@@ -31,7 +31,7 @@ Background: will run for each scenario first
     Then user should see the home page for advisor
 
 #@regression
-  @Javid
+  @smoke
 Scenario: Login as a admin
   Given user is on Docuport login page
   When user enters username for admin
