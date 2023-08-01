@@ -4,7 +4,7 @@ Background: will run for each scenario first
   Given user is on Docuport login page
 
  # @smoke @regression
-  @Javid
+  @smoke
   Scenario: Login as a client
     Given user is on Docuport login page
     When user enters username for client
@@ -38,6 +38,13 @@ Scenario: Login as a admin
   And user enters password for admin
   And user clicks login button
   Then user should see the home page for admin
+
+    @Java
+  Scenario: Login as a supervisor
+    When user enter username for supervisor
+    And  user enter password for supervisor
+    And  user clicks login button
+    Then user should see the home page for supervisor
 
   #@regression
   @Javid

@@ -90,6 +90,10 @@ public class LoginStepDefs {
     public void user_should_see_the_home_page_for_admin() {
         BrowserUtils.waitForVisibility(loginPage.loginButton, 10);
         loginPage.loginButton.isDisplayed();
+
+
+
+
     }
 
     @When("user enters credentials")
