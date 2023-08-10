@@ -39,6 +39,22 @@ public class LoginStepDefs {
         loginPage.loginButton.isDisplayed();
     }
 
+    @When("user enter username for supervisor")
+    public void user_enter_username_for_supervisor() {
+        loginPage.usernameInput.sendKeys(DocuportConstants.USERNAME_SUPERVISOR);
+
+    }
+    @When("user enter password for supervisor")
+    public void user_enter_password_for_supervisor() {
+        loginPage.passwordInput.sendKeys(DocuportConstants.PASSWORD);
+
+    }
+    @Then("user should see the home page for supervisor")
+    public void user_should_see_the_home_page_for_supervisor() {
+        BrowserUtils.waitForVisibility(loginPage.loginButton, 10);
+        loginPage.loginButton.isDisplayed();
+    }
+
     @When("user enters username for employee")
     public void userEntersUsernameForEmployee() {
 
